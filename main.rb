@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby -wKU
 
+require "fileutils"
+
+include FileUtils::Verbose
 # Filter class to filter data
 class Filter
 
@@ -258,5 +261,26 @@ end
 
 #Manage Data Retrieval
 class Upload
+
+  UPLOAD_DIR = './uploads/'
+
+  attr_reader :file_path, :user, :trial
+
+  def initialize(file_path = nil, user_params = nil, trial_params = nil)
+    if @file_path = file_path
+      file_name = @file_path.split('/').last.split('.txt').first.split('_')
+  end
+
+  def create
+
+  end
+
+  def find
+
+  end
+
+  def all
+
+  end
 
 end
