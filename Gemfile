@@ -2,4 +2,9 @@
 
 source "https://rubygems.org"
 
-gem "sinatra", path: './vendor/bundle/ruby/3.0.0/gems/'
+gem "sinatra"
+gem "thin"
+gem "puma"
+gem "reel"
+gem "http"
+gem "webrick"

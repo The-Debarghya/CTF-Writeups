@@ -138,7 +138,7 @@ class User
     raise 'Invalid height' if @height && (@height <= 0)
     raise 'Invalid stride' if @stride && (@stride <= 0)
 
-    @stride || = calculate_stride
+    @stride ||= calculate_stride
 
   end
 
@@ -269,8 +269,8 @@ class Upload
   def initialize(file_path = nil, user_params = nil, trial_params = nil)
     if @file_path = file_path
       file_name = @file_path.split('/').last.split('.txt').first.split('_')
-      @user = User.new(*file_name.first.split('-'))
-      @trial = Trial.new(*file_name.last.split('-'))
+      @user = User.new(user_params)
+      @trial = Trial.new(trial_params)
     elsif user_params && trial_params
       @user = User.new(*user_params.values)
       @trial = Trial.new(*trial_params.values)
