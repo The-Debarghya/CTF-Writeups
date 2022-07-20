@@ -22,7 +22,7 @@ end
 
 post '/create' do
   begin
-    Upload.create(params[:data][:temp_file], params[:user], params[:trial])
+    Upload.create(params[:data][:tempfile], params[:user], params[:trial])
 
     redirect '/uploads'
 

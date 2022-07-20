@@ -262,15 +262,15 @@ end
 #Manage Data Retrieval
 class Upload
 
-  UPLOAD_DIR = './uploads/'
+  UPLOAD_DIR = './public/uploads/'
 
   attr_reader :file_path, :user, :trial
 
   def initialize(file_path = nil, user_params = nil, trial_params = nil)
     if @file_path = file_path
       file_name = @file_path.split('/').last.split('.txt').first.split('_')
-      @user = User.new(user_params)
-      @trial = Trial.new(trial_params)
+      @user = User.new(*file_name.first.split('-'))
+      @trial = Trial.new(*file_name.last.split('-'))
     elsif user_params && trial_params
       @user = User.new(*user_params.values)
       @trial = Trial.new(*trial_params.values)
