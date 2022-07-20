@@ -2,4 +2,4 @@
 
 source "https://rubygems.org"
 
-gem "sinatra"
+gem "sinatra", path: './vendor/bundle/ruby/3.0.0/gems/'
