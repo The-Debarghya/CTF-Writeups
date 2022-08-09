@@ -268,7 +268,7 @@ class Upload
 
   def initialize(file_path = nil, user_params = nil, trial_params = nil)
     if @file_path = file_path
-      file_name = @file_path.split('/').last.split('.txt').first.split('_')
+      file_name = @file_path.split('/').last.split('.csv').first.split('_')
       @user = User.new(*file_name.first.split('-'))
       @trial = Trial.new(*file_name.last.split('-'))
     elsif user_params && trial_params
@@ -296,7 +296,7 @@ class Upload
   end
 
   def self.generate_file_path(user, trial)
-    UPLOAD_DIR + "#{user.gender}-#{user.height}-#{user.stride}_" + "#{trial.name}-#{trial.rate}-#{trial.steps}.txt"
+    UPLOAD_DIR + "#{user.gender}-#{user.height}-#{user.stride}_" + "#{trial.name}-#{trial.rate}-#{trial.steps}.csv"
   end
 
 end
