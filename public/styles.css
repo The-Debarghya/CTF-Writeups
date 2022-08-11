@@ -70,3 +70,10 @@ body {
 		background-position: 0% 50%;
 	}
 }
+
+#uploadFile {
+  text-align: center;
+  border: none;
+  background-color: white;
+  color: black;
+}

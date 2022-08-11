@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby -wKU
 
 require "fileutils"
+require "csv"
 
 include FileUtils::Verbose
 # Filter class to filter data
@@ -67,12 +68,16 @@ class Parser
   end
 
   def parse
-    @parsed_data = @data.to_s.split(';').map{ |x| x.split('|') }.map{ |x| x.map{ |x| x.split(',').map(&:to_f) } }
-
+  #  @parsed_data = @data.to_s.split(';').map{ |x| x.split('|') }.map{ |x| x.map{ |x| x.split(',').map(&:to_f) } }
+    CSV.foreach(@data, headers: true, col_sep: ",", converters: :numeric) do |row|
+      temp = [[row["gFx"], row["gFy"], row["gFz"]], [row["ax"], row["ay"], row["az"]]]
+      @parsed_data << temp
+    end
     unless @parsed_data.map { |x| x.map(&:length).uniq }.uniq == [[3]]
       raise 'Invalid Input Format. Ensure data is properly formatted.'
     end
 
+=begin
     if @parsed_data.first.count == 1
       filtered_accl = @parsed_data.map(&:flatten).transpose.map do |total_accl|
         grav = Filter.low_0_hz(total_accl)
@@ -86,8 +91,8 @@ class Parser
         [user, grav]
       end
     end
+=end
   end
-
 end
 
 
