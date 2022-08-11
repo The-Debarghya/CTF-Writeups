@@ -6,7 +6,7 @@ require_relative "viewUtil.rb"
 get '/uploads' do
   @error = "An #{params[:error]} error has occurred." if params[:error]
   @pipelines = Upload.all.inject([]) do |a, upload|
-    a << Pipeline.run(File.read(upload.file_path), upload.user, upload.trial)
+    a << Pipeline.run(upload.file_path, upload.user, upload.trial)
     a
   end
 
@@ -15,7 +15,7 @@ end
 
 get '/upload/*' do |file_path|
   upload = Upload.find(file_path)
-  @pipeline = Pipeline.run(File.read(file_path), upload.user, upload.trial)
+  @pipeline = Pipeline.run(upload.file_path, upload.user, upload.trial)
 
   erb :upload
 end

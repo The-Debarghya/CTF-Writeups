@@ -9,7 +9,7 @@ end
 
 def format_time(time_in_sec)
   return '' if time_in_sec.nil?
-  Time.at(time_in_sec.round).local.strftime("%-H hr, %-M min, %-S sec")
+  Time.at(time_in_sec.round).utc.strftime("%-H hr, %-M min, %-S sec")
 end
 
 def format_dist(dist_in_cm)

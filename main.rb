@@ -57,22 +57,24 @@ class Parser
 
   attr_reader :parsed_data
 
-  def self.run(data)
-    parser = Parser.new(data)
+  def self.run(file_name)
+    parser = Parser.new(file_name)
     parser.parse
     parser
   end
 
-  def initialize(data)
-    @data = data
+  def initialize(file_name)
+    @file_name = file_name
   end
 
   def parse
   #  @parsed_data = @data.to_s.split(';').map{ |x| x.split('|') }.map{ |x| x.map{ |x| x.split(',').map(&:to_f) } }
-    CSV.foreach(@data, headers: true, col_sep: ",", converters: :numeric) do |row|
-      temp = [[row["gFx"], row["gFy"], row["gFz"]], [row["ax"], row["ay"], row["az"]]]
-      @parsed_data << temp
+    data = []
+    CSV.foreach(@file_name, headers: true, col_sep: ",", converters: :numeric) do |row|
+      temp = [[row["ax"], row["ay"], row["az"]], [row["gFx"], row["gFy"], row["gFz"]]]
+      data << temp
     end
+    @parsed_data = data
     unless @parsed_data.map { |x| x.map(&:length).uniq }.uniq == [[3]]
       raise 'Invalid Input Format. Ensure data is properly formatted.'
     end
@@ -241,22 +243,22 @@ end
 #Pipeline all the classes(Parser, Processor, Analyzer) together
 class Pipeline
 
-  attr_reader :data, :user, :trial, :parser, :processor, :analyzer
+  attr_reader :file_name, :user, :trial, :parser, :processor, :analyzer
 
-  def self.run(data, user, trial)
-    pipeline = Pipeline.new(data, user, trial)
+  def self.run(file_name, user, trial)
+    pipeline = Pipeline.new(file_name, user, trial)
     pipeline.feed
     pipeline
   end
 
-  def initialize(data, user, trial)
-    @data = data
+  def initialize(file_name, user, trial)
+    @file_name = file_name
     @user = user
     @trial = trial
   end
 
   def feed
-    @parser = Parser.run(@data)
+    @parser = Parser.run(@file_name)
     @processor = Processor.run(@parser.parsed_data)
     @analyzer = Analyzer.run(@processor.filtered_data, @user, @trial)
   end

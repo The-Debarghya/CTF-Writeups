@@ -17,7 +17,7 @@
             title: { text: 'User Acceleration in the Direction of Gravity' },
             series: [{
                 name: 'a(t)',
-                data: <%= limit_1000(@pipeline.processor.dot_product_data) %>
+                data: <%= range_1000(@pipeline.processor.dot_prod_data) %>
             }],
             xAxis: { title: { text: 'Time' } },
             yAxis: { title: { text: 'Acceleration' } }
@@ -27,7 +27,7 @@
             title: { text: 'User Acceleration in the Direction of Gravity - Filtered' },
             series: [{
                 name: 'a(t)',
-                data: <%= limit_1000(@pipeline.processor.filtered_data) %>
+                data: <%= range_1000(@pipeline.processor.filtered_data) %>
             }],
             xAxis: { title: { text: 'Time' } },
             yAxis: { title: { text: 'Acceleration' } }

@@ -20,7 +20,7 @@
           <a href=<%= "upload/" + Upload.generate_file_path(pipeline.user, pipeline.trial) %>>Detail</a>
         </td>
       <% else %>
-        <td><%= format_distance(pipeline.analyzer.distance) %></td>
+        <td><%= format_dist(pipeline.analyzer.distance) %></td>
         <td><%= format_time(pipeline.analyzer.time) %></td>
       <% end %>
     </tr>
