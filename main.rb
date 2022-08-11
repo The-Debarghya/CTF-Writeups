@@ -140,7 +140,6 @@ class User
     @gender = gender.to_s.downcase unless gender.to_s.empty?
     @height = Float(height) unless height.to_s.empty?
     @stride = Float(stride) unless stride.to_s.empty?
-
     raise 'Invalid gender' if @gender && !GENDER.include?(@gender)
     raise 'Invalid height' if @height && (@height <= 0)
     raise 'Invalid stride' if @stride && (@stride <= 0)

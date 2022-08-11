@@ -14,6 +14,9 @@ get '/uploads' do
 end
 
 get '/upload/*' do |file_path|
+  if file_path.include? "styles.css"
+    next    
+  end
   upload = Upload.find(file_path)
   @pipeline = Pipeline.run(upload.file_path, upload.user, upload.trial)
 
