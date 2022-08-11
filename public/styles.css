@@ -7,8 +7,8 @@ table.summary {
 
 tr, th {
   text-align: left;
-  font-size: 14px;
-  height: 30px;
+  font-size: 20px;
+  height: 36px;
 }
 
 td { border-top: solid 1px rgb(221, 221, 221); }
@@ -70,10 +70,12 @@ body {
 		background-position: 0% 50%;
 	}
 }
+.float-container {
+    padding: 20px;
+}
 
-#uploadFile {
-  text-align: center;
-  border: none;
-  background-color: white;
-  color: black;
+.float-child {
+    width: 50%;
+    float: left;
+    padding: 20px;
 }

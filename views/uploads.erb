@@ -4,15 +4,45 @@
 
 <html>
     <div class="notification is-danger is-light"><%= @error %></div>
-  <%= erb :summary, locals: { pipelines: @pipelines, detail_hidden: true } %>
+    <div class="float-container">
+
+    <div class="float-child">
+      <%= erb :summary, locals: { pipelines: @pipelines, detail_hidden: true } %>
+    </div>
+  <div class="float-child" align="center">
   <form method="post" action="/create" enctype="multipart/form-data">
     <h3 class="subtitle is-3">Trial Info</h3>
-    <input name="data" type="file">
+    <!--<input name="data" type="file">-->
+    <div class="file has-name is-primary" id="file-section">
+      <label class="file-label">
+        <input class="file-input" type="file" name="data">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Choose a file…
+          </span>
+        </span>
+        <span class="file-name">
+          No File Chosen
+        </span>
+      </label>
+    </div>
+    <script>
+      const fileInput = document.querySelector('#file-section input[type=file]');
+      fileInput.onchange = () => {
+        if (fileInput.files.length > 0) {
+          const fileName = document.querySelector('#file-section .file-name');
+          fileName.textContent = fileInput.files[0].name;
+        }
+      }
+    </script>
     <input name="trial[name]" class="input is-info is-medium" placeholder="Name">
     <input name="trial[rate]" type="number" class="input is-info" placeholder="Sampling Rate">
     <input name="trial[steps]" type="number" class="input is-info" placeholder="Actual Step Count">
     <h3 class="subtitle is-3">User Info</h3>
-    <div class="select is-info">
+    <div class="select is-info" align="left">
       <select class="params" name="user[gender]">
         <option value="">(Select a gender)</option>
         <option value="male">Male</option>
@@ -24,4 +54,6 @@
     <input class="input is-info" type="number" step="0.1" name="user[stride]" placeholder="Stride (cm)">
     <button class="button is-info is-rounded" type="submit">Submit</button>
   </form>
+  </div>
+  </div>
 </html>
