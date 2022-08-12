@@ -1,0 +1,10 @@
+# Uploaded Files
+uploads
+*.csv
+*.txt
+
+# Dependencies
+vendor
+
+# Config Files
+.bundle
