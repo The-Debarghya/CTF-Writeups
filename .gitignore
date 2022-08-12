@@ -8,3 +8,7 @@ vendor
 
 # Config Files
 .bundle
+
+# Log Files
+*.log
+log
