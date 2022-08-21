@@ -18,5 +18,5 @@ bundle exec rackup --port 4567 --env development
 * Then navigate to `localhost:4567/uploads` in browser to use the application.
 
 **OR**
-* Can be run as a docker container with the following command:
+* Can be run as a docker container with the following command:<br>
 `docker run -it --rm -p 4567:4567 -v log:/app/log -v uploads:/app/public/uploads heisenberg8622/pedometer`

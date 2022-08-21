@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-# Base Image(debian, latest-stable)
+# Base Image(ubuntu, latest-stable)
 FROM ubuntu:latest
 
 # Update the system and install requirements
@@ -12,7 +12,7 @@ COPY Gemfile Gemfile.lock /app/
 RUN gem install rack
 RUN bundle install
 
-
+# Run the app in container
 COPY . /app
 VOLUME /app/log
 EXPOSE 4567/tcp 9292/tcp
